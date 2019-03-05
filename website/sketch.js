@@ -19,7 +19,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(700, 700);
+  createCanvas(1584, 644);
   image(img, 0, 0);
   x = width/2;
   y = height/2;
@@ -41,6 +41,7 @@ var checkGP = window.setInterval(function() {
 }, 500);
 
 function draw() {
+  image(img, 0, 0);
 
   if(Math.abs(rl) > 0.2 || Math.abs(fb) > 0.2) {
     x += rl*speed;
@@ -53,7 +54,7 @@ function draw() {
   rotate(angle);
 
   stroke(255);
-  noFill();
+  fill(70);
   square(-20, -20, 40);
 
   if(connected) {
