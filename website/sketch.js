@@ -12,9 +12,15 @@ let angle;
 
 const speed = 4;
 
+let img;
+
+function preload() {
+  img = loadImage('field.jpg');
+}
+
 function setup() {
   createCanvas(700, 700);
-  background(70);
+  image(img, 0, 0);
   x = width/2;
   y = height/2;
   angle = 0;
@@ -35,7 +41,6 @@ var checkGP = window.setInterval(function() {
 }, 500);
 
 function draw() {
-  background(70);
 
   if(Math.abs(rl) > 0.2 || Math.abs(fb) > 0.2) {
     x += rl*speed;
