@@ -6,10 +6,6 @@ let fb = 0;
 let rl = 0;
 let rot = 0;
 
-let xr;
-let yr;
-let angle;
-
 const speed = 4;
 
 let img;
@@ -31,13 +27,13 @@ function setup() {
   createCanvas(1584, 644);
   image(img, 0, 0);
 
-  robot = new Rect(40, 40, width/2, height/2, 70);
-  angle = 0;
+  robot = new Rect(40, 40, width/2, height/2, 0, 70, 0);
+  robot.a = 0;
 
-  leftWall = new Rect(82, 644, 172, 322, 0, 0);
-  topWall = new Rect(1163, 39, 796, 15, 0, 1);
-  rightWall = new Rect(82, 644, 1414, 322, 0, 2);
-  bottomWall = new Rect(1159, 35, 793, 626, 0, 3);
+  leftWall = new Rect(82, 644, 172, 322, 0, 0, 1);
+  topWall = new Rect(1163, 39, 796, 15, 0, 0, 2);
+  rightWall = new Rect(82, 644, 1414, 322, 0, 0, 3);
+  bottomWall = new Rect(1159, 35, 793, 626, 0, 0, 4);
 }
 
 $(window).on("gamepadconnected", function() {
@@ -62,7 +58,7 @@ function draw() {
     robot.y += fb*speed;
   }
   if(Math.abs(rot) > 0.2) {
-    angle += rot*0.05;
+    robot.a += rot*0.05;
   }
 
   robot.draw();
@@ -80,19 +76,22 @@ function draw() {
 }
 
 class Rect {
-  constructor(w, h, x, y, c, t) {
+  constructor(w, h, x, y, a, c, t) {
     this.w = w;
     this.h = h;
     this.x = x;
     this.y = y;
+    this.a = a;
     this.c = c;
     this.t = t;
   }
   
   draw() {
+    push();
     translate(this.x, this.y);
-    rotate(angle);
+    rotate(this.a);
     fill(this.c);
     rect(-this.w/2, -this.h/2, this.w, this.h);
+    pop();
   }
 }
